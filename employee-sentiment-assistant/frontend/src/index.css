@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { font-family: 'DM Sans', sans-serif; }
+  h1, h2, h3, h4, h5, h6 { font-family: 'Syne', sans-serif; }
+  code, pre { font-family: 'DM Mono', monospace; }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #1E2130; }
+  ::-webkit-scrollbar-thumb { background: #2E3347; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #7C6EF5; }
+
+  ::selection { background: rgba(124, 110, 245, 0.3); }
+}
+
+@layer components {
+  .card {
+    @apply bg-slate rounded-2xl border border-slate-border shadow-card;
+  }
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-card-hover hover:border-violet/30 hover:-translate-y-0.5;
+  }
+  .btn-primary {
+    @apply bg-violet hover:bg-violet-light text-white font-semibold px-5 py-2.5 rounded-xl
+           transition-all duration-200 active:scale-95 shadow-glow-violet;
+  }
+  .btn-ghost {
+    @apply border border-slate-border hover:border-violet/40 hover:bg-violet/5 text-ghost-light
+           hover:text-white font-medium px-4 py-2 rounded-xl transition-all duration-200;
+  }
+  .input-field {
+    @apply w-full bg-ink-50 border border-slate-border rounded-xl px-4 py-3 text-white
+           placeholder-ghost focus:outline-none focus:border-violet/60 focus:ring-1 focus:ring-violet/30
+           transition-all duration-200 font-body;
+  }
+  .badge-positive  { @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald/15 text-emerald-light; }
+  .badge-negative  { @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-rose/15 text-rose-light; }
+  .badge-neutral   { @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber/15 text-amber-light; }
+  .badge-critical  { @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-rose/20 text-rose-light border border-rose/30; }
+  .badge-high      { @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber/15 text-amber-light; }
+  .badge-medium    { @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-violet/15 text-violet-light; }
+  .badge-low       { @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-ghost/15 text-ghost-light; }
+
+  .stat-card {
+    @apply card p-6 relative overflow-hidden;
+  }
+  .glow-dot {
+    @apply w-2 h-2 rounded-full animate-pulse-slow;
+  }
+}
+
+/* Recharts custom overrides */
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: #1E2130 !important;
+  border: 1px solid #2E3347 !important;
+  border-radius: 12px !important;
+  padding: 10px 14px !important;
+}
+.recharts-cartesian-grid line { stroke: #2E3347; }
+.recharts-cartesian-axis-tick-value { fill: #636D7E; font-size: 11px; }
+
+/* Animated gradient background for auth page */
+.auth-bg {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 40%, rgba(124,110,245,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 70%, rgba(34,211,238,0.05) 0%, transparent 60%),
+    #0D0F14;
+}
+
+/* Shimmer skeleton */
+.skeleton {
+  background: linear-gradient(90deg, #1E2130 25%, #252A3D 50%, #1E2130 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}

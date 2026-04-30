@@ -1,0 +1,40 @@
+services:
+  # ── Backend (FastAPI) ─────────────────────────────────
+  - type: web
+    name: sentimentai-backend
+    runtime: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sentimentai-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: OPENAI_API_KEY
+        sync: false   # Set manually in Render dashboard
+      - key: DEMO_MODE
+        value: "false"
+      - key: CORS_ORIGINS
+        value: "https://sentimentai-frontend.onrender.com"
+
+  # ── Frontend (React/Vite static) ─────────────────────
+  - type: web
+    name: sentimentai-frontend
+    runtime: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        value: "https://sentimentai-backend.onrender.com"
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+databases:
+  - name: sentimentai-db
+    databaseName: sentiment_db
+    user: sentimentai
+    plan: free
