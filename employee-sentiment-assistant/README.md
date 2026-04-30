@@ -289,4 +289,3 @@ MIT — free to use, modify, and deploy.
 
 ---
 
-Built with ❤️ using FastAPI, React, PostgreSQL, and OpenAI GPT.
